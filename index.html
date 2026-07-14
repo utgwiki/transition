@@ -192,9 +192,15 @@
 	if (currentPath !== "/" && currentPath !== "/index.html") {
 		const targetUrl = baseUrl + currentPath + currentQuery + currentHash;
 
+		const pageName = currentPath
+			.replace(/^\/wiki\//, "")
+			.replace(/^\//, "")
+			.replace(/_/g, " ")
+			.replace(/\b\w/g, letter => letter.toUpperCase());
+
 		pageButton.href = targetUrl;
 		pageButton.hidden = false;
-		pageButton.textContent = `Go to ${currentPath.replace("/", "").replace("/wiki/", "")}`;
+		pageButton.textContent = `Go to ${pageName}`;
 	}
 </script>
 
