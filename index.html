@@ -146,7 +146,7 @@
 		<a class="button" href="https://utg.miraheze.org">utg.miraheze.org <span class="material-symbols-outlined">
 				arrow_circle_right
 			</span></a>
-		<a class="button" id="page-button" href="#" hidden>
+		<a class="button" id="page-button" href="https://utg.miraheze.org" hidden>
 		Go to this page
 			<span class="material-symbols-outlined">open_in_new</span>
 		</a>
@@ -200,7 +200,7 @@
 
 		pageButton.href = targetUrl;
 		pageButton.hidden = false;
-		pageButton.textContent = `Go to ${pageName}`;
+		pageButton.innerHTML = `Go to ${pageName} <span class="material-symbols-outlined">open_in_new</span>`;
 	}
 </script>
 
