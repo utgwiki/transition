@@ -96,20 +96,20 @@
 			filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
 			opacity: 0;
 
-			>p {
+			> p {
 				display: none;
 			}
 
-			&:not(:has(* iframe)) {
+			&:not(:has(* iframe[style^="position: static; visibility: visible;"])) {
 				width: 0;
 				height: 0;
 				overflow: hidden;
+				visibility: hidden;
 			}
 
-			&:has(* iframe) {
+			&:has(* iframe[style^="position: static; visibility: visible;"]) {
 				opacity: 1;
 				transition: opacity .25s;
-				transition-delay: .5s;
 			}
 		}
 
@@ -146,6 +146,10 @@
 		<a class="button" href="https://utg.miraheze.org">utg.miraheze.org <span class="material-symbols-outlined">
 				arrow_circle_right
 			</span></a>
+		<a class="button" id="page-button" href="#" hidden>
+		Go to this page
+			<span class="material-symbols-outlined">open_in_new</span>
+		</a>
 	</main>
 </body>
 
@@ -176,6 +180,22 @@
 	}
 
 	update();
+
+	const baseUrl = "https://utg.miraheze.org";
+
+	const currentPath = window.location.pathname;
+	const currentQuery = window.location.search;
+	const currentHash = window.location.hash;
+
+	const pageButton = document.getElementById("page-button");
+
+	if (currentPath !== "/" && currentPath !== "/index.html") {
+		const targetUrl = baseUrl + currentPath + currentQuery + currentHash;
+
+		pageButton.href = targetUrl;
+		pageButton.hidden = false;
+		pageButton.textContent = `Go to ${currentPath.replace("/", "").replace("/wiki/", "")}`;
+	}
 </script>
 
 </html>

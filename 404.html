@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<body>
+<script>
+fetch("/index.html")
+  .then(r => r.text())
+  .then(html => {
+    document.open();
+    document.write(html);
+    document.close();
+  });
+</script>
+</body>
+</html>
