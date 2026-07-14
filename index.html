@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>We're moving!</title>
+	<link rel="icon" type="image/svg+xml" href="/package.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@6..144,1..1000,0..100&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+	<style>
+		:root {
+			--text: #e2e2e2;
+
+			color-scheme: dark;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			color: var(--text);
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			padding: 2rem;
+			background: rgb(26, 26, 26);
+			font-family: "Google Sans Flex", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				z-index: -1;
+				background: radial-gradient(120% 90% at 50% 0%, rgba(102, 212, 207, 0.14) 0%, rgba(102, 212, 207, 0.05) 45%, rgba(24, 24, 24, 0.6) 100%), rgb(26, 26, 26);
+				opacity: 1;
+				transition: opacity 1s;
+
+				@starting-style {
+					opacity: 0;
+				}
+			}
+		}
+
+		main {
+			max-width: 700px;
+			text-align: center;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		h1 {
+			font-size: 3rem;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			margin: 0;
+			font-variation-settings: "wght" 700, "ROND" 80;
+		}
+
+		.button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 5px;
+			margin-top: 1rem;
+			padding: 0.8rem 1rem;
+			border-radius: 0.8rem;
+			border: 1px solid oklch(from var(--text) l c h / 0.1);
+			text-decoration: none;
+			font-weight: 700;
+			transition: .5s background, .5s color;
+
+			&:hover {
+				background: #3b3b3b;
+			}
+		}
+
+		.tweet-wrapper {
+			margin-top: -15px;
+			filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+			opacity: 0;
+
+			>p {
+				display: none;
+			}
+
+			&:not(:has(* iframe)) {
+				width: 0;
+				height: 0;
+				overflow: hidden;
+			}
+
+			&:has(* iframe) {
+				opacity: 1;
+				transition: opacity .25s;
+				transition-delay: .5s;
+			}
+		}
+
+		.twitter-tweet {
+			margin: auto;
+			border-radius: .8rem;
+			overflow: hidden;
+			position: relative;
+			will-change: transform;
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<h1>We're moving <span class="material-symbols-outlined" style="font-size: inherit;">package_2</span></h1>
+		<div class="tweet-wrapper">
+			<blockquote class="twitter-tweet" data-theme="dark">
+				<p lang="en" dir="ltr">starting August 1st, the wiki&#39;s domain will be transitioning back to <a
+						href="https://t.co/QF8rUFC4pJ">https://t.co/QF8rUFC4pJ</a> as a result of increasing renewal
+					costs.
+					links may break on that day as you browse on the wiki or when you search us on google<a
+						href="https://x.com/hashtag/UpdateYourBookmarks?src=hash&amp;ref_src=twsrc%5Etfw">#UpdateYourBookmarks</a>
+					🔖</p>&mdash; untitled tag game wiki (@utgwiki) <a
+					href="https://x.com/utgwiki/status/2076575659066007947?ref_src=twsrc%5Etfw">July 13, 2026</a>
+			</blockquote>
+			<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+		</div>
+
+		<p>
+			Do update your bookmarks to reflect
+			this new change!
+		</p>
+		<a class="button" href="https://utg.miraheze.org">utg.miraheze.org <span class="material-symbols-outlined">
+				arrow_circle_right
+			</span></a>
+	</main>
+</body>
+
+<script>
+	let mouseX = 0;
+	let mouseY = 0;
+
+	let lerpedX = 0;
+	let lerpedY = 0;
+
+	document.addEventListener("mousemove", e => {
+		mouseX = e.clientX / window.innerWidth * 20 - 10;
+		mouseY = e.clientY / window.innerHeight * 20 - 10;
+	});
+
+	const tweets = document.querySelectorAll(".tweet-wrapper");
+
+	function update() {
+		lerpedX += (mouseX - lerpedX) * 0.05;
+		lerpedY += (mouseY - lerpedY) * 0.05;
+
+		tweets.forEach(tweet => {
+			tweet.style.transform =
+				`translate(${lerpedX}px, ${lerpedY}px) rotate(${lerpedX * 0.15}deg)`;
+		});
+
+		requestAnimationFrame(update);
+	}
+
+	update();
+</script>
+
+</html>
