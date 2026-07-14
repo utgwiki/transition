@@ -1,0 +1,1 @@
+This repository is a simple HTML page designed to inform users about the transition of the untitled tag game wiki's domain.
